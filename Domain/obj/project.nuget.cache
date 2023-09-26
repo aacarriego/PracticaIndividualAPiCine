@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i2mbKUoHB6Zk0R8ihV07cqkb7rmIMjlwjhGVK+p0bzXzCwXRhEae1JJFAPhakTvygpHio8+8Qi5BnMLr5PRfMQ==",
+  "dgSpecHash": "wsdd5JgfkiPjDW0eltrHKUQ9I+Ts/fhxOq7GCIC/4A0YC/gHuBjjA9juWC4ehNTqkW941cTMwLEGh42gF39daw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

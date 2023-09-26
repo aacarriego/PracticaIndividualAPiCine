@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Domain\\Domain.csproj": {}
+    "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Domain\\Domain.csproj": {
+    "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\aacar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aacar\\AppData\\Roaming\\NuGet\\NuGet.Config",

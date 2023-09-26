@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6Z4DF766FLSPpKvP/cfawkQgE3JeKSAdJ3l8EmjIr1n9Nbu1vMCbedQ1f/2sPcwWXGc8xyylj3NRap3tGM1MTg==",
+  "dgSpecHash": "AdKOtLI7UFI64rKJzzcn9azd825PIgGiwp79NKSYVyLCCWuwyuOLo7+p6rGTuJHLEfdteVXJ/PCuszRvY8hLwQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aacar\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",

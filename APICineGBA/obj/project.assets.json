@@ -3425,11 +3425,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\APICineGBA\\APICineGBA.csproj",
+      "projectUniqueName": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\APICineGBA\\APICineGBA.csproj",
       "projectName": "APICineGBA",
-      "projectPath": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\APICineGBA\\APICineGBA.csproj",
+      "projectPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\APICineGBA\\APICineGBA.csproj",
       "packagesPath": "C:\\Users\\aacar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\APICineGBA\\obj\\",
+      "outputPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\APICineGBA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\aacar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3446,8 +3446,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\aacar\\source\\repos\\APICineGBA\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
