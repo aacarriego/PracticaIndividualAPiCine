@@ -14,8 +14,9 @@ namespace Application.Mappers
         public AutoMapping() 
         {
             CreateMap<FuncionResponseDTO, Funcion>();
-            CreateMap<Funcion, FuncionResponseDTO>();
 
+
+            CreateMap<Funcion, FuncionResponseDTO>();
         }
     }
 }

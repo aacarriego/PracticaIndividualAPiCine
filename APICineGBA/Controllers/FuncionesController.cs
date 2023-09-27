@@ -53,14 +53,19 @@ namespace APICineGBA.Controllers
 
         }
 
-        [HttpDelete]
-        public async Task<FuncionResponseDTO> DeleteFuncion(int FuncionId)
+      
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFuncion(int FuncionId)
         {
-            throw new NotImplementedException();
-        }
-        
-           
+           var result = await _service.DeleteFuncion(FuncionId);
+
+            return new JsonResult(result);
         }
 
+
+
     }
+
+}
 

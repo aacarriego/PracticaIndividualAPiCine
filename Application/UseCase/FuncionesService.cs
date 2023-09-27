@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCase
 { 
-    public class FuncionesService : IFuncionesService
+   public class FuncionesService : IFuncionesService
     {
         private readonly IMapper _mapper;
         private readonly IFuncionesQuery _query;
@@ -23,30 +23,27 @@ namespace Application.UseCase
             _command = command;
         }
 
-        public Task<FuncionResponseDTO> CreateFuncion(Funcion request)
+        public async Task<FuncionResponseDTO> CreateFuncion(Funcion request)
         {
-
-            return  _command.InsertFuncion(request);
-            
+            return await _command.InsertFuncion(request);
         }
 
 
-        public Task<FuncionResponseDTO> DeleteFuncion(int FuncionId)
+        public async Task<FuncionResponseDTO> DeleteFuncion(int FuncionId)
         {
-            return _command.DeleteFuncion(FuncionId);
+            return await _command.DeleteFuncion(FuncionId);
         }
 
         public async Task<List<Funcion>> GetAll()
         {
             return await _query.GetListFunciones();
         }
-        
-        public Task<FuncionResponseDTO> GetById(int FuncionId)
-        {
-            //FuncionResponseDTO funcion= _query.GetFuncion(FuncionId).Result;
-            //return _command.
 
-            throw new NotImplementedException();
+        public async Task<FuncionResponseDTO> GetById(int FuncionId)
+        {
+            var funcion = await _query.GetFuncion(FuncionId);
+
+            return _mapper.Map<Funcion, FuncionResponseDTO>(funcion);
         }
     }
 }
