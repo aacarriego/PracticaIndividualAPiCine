@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class FuncionPostDTO
+    public class FuncionRequestDTO
     {
         public int PeliculaId { get; set; }
         public int SalaId { get; set; }      

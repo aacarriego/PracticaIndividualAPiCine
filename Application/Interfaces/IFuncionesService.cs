@@ -11,7 +11,7 @@ namespace Application.Interfaces
 {
     public interface IFuncionesService
     {
-        Task<Funcion> CreateFuncion(FuncionPostDTO request);
+        Task<FuncionResponseDTO> CreateFuncion(Funcion request);
 
         Task<List<Funcion>> GetAll();
 

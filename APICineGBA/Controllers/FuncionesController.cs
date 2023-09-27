@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,10 +36,17 @@ namespace APICineGBA.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> CreateFuncion(FuncionPostDTO request)
+        public async Task<IActionResult> CreateFuncion(FuncionRequestDTO request)
         {
+            var funcion= new Funcion
+            {
+                PeliculaId= request.PeliculaId, 
+                Fecha = request.Fecha,
+                SalaId = request.SalaId,
+                Horario = request.Horario
+            };
          
-             var result= await _service.CreateFuncion(request);
+             var result= await _service.CreateFuncion(funcion);
 
             return new JsonResult(result);
 

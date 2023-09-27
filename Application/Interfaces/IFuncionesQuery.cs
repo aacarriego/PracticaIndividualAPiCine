@@ -9,7 +9,7 @@ namespace Application.Interfaces
 {
     public interface IFuncionesQuery
     {
-        List<Funcion> GetListFunciones();
+       Task< List<Funcion>> GetListFunciones();
 
         Funcion GetFuncion(int FuncionId);
     }
