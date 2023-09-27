@@ -10,21 +10,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Infrastructure.Command
 {
     public class FuncionesCommand : IFuncionesCommand
     {
         private readonly AppDbContext _context;
-        private readonly IMapper _mapper;
+
+       
         public FuncionesCommand(AppDbContext context)
         {
             _context = context;
+            
         }
 
-        public Task DeleteFuncion(Funcion funcionId)
+        public async Task<FuncionResponseDTO> DeleteFuncion(int funcionId)
         {
-            throw new NotImplementedException();
+
+            List<Funcion> funciones = await _context.Funciones.ToListAsync();
+
+            if (funciones == null && funciones.Count > 0) 
+            {
+                throw new Exception(" no existe ");
+            }
+            var funcion = await _context.Funciones.FindAsync(funcionId);    
+
+            _context.Funciones.Remove(funcion);
+
+            return new FuncionResponseDTO
+            {
+                FuncionId = funcion.FuncionId,
+                Fecha = funcion.Fecha,
+                Horario = funcion.Horario,
+               
+            };
         }
 
         public async Task<FuncionResponseDTO> InsertFuncion(Funcion request)
@@ -50,7 +70,7 @@ namespace Infrastructure.Command
             // var funcionResponse = _mapper.Map<funcion>(request);
             return new FuncionResponseDTO
             {
-                FuncionId= funcion.FuncionId,
+                FuncionId = funcion.FuncionId,
 
                 Horario = funcion.Horario,
                 Fecha = funcion.Fecha,
@@ -71,7 +91,7 @@ namespace Infrastructure.Command
                     Nombre = _context.Salas.Find(funcion.SalaId).Nombre,
                     Capacidad = sala.Capacidad,
                 }
-            
+
             };
         }
     }

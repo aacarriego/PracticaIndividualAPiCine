@@ -11,6 +11,6 @@ namespace Application.Interfaces
     {
        Task< List<Funcion>> GetListFunciones();
 
-        Funcion GetFuncion(int FuncionId);
+        Task <Funcion> GetFuncion(int FuncionId);
     }
 }

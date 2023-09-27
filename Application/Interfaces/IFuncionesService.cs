@@ -15,8 +15,8 @@ namespace Application.Interfaces
 
         Task<List<Funcion>> GetAll();
 
-        Task<Funcion> GetById(int FuncionId);
+        Task<FuncionResponseDTO> GetById(int FuncionId);
 
-        Task<Funcion> DeleteFuncion(int FuncionId);
+        Task<FuncionResponseDTO> DeleteFuncion(int FuncionId);
     }
 }

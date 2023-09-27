@@ -11,6 +11,6 @@ namespace Application.Interfaces
     public interface IFuncionesCommand
     {
         Task<FuncionResponseDTO> InsertFuncion(Funcion funcion);
-        Task DeleteFuncion(Funcion funcionId);
+        Task<FuncionResponseDTO> DeleteFuncion(int funcionId);
     }
 }

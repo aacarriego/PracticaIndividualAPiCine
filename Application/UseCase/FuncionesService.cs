@@ -25,27 +25,27 @@ namespace Application.UseCase
 
         public Task<FuncionResponseDTO> CreateFuncion(Funcion request)
         {
-          
 
             return  _command.InsertFuncion(request);
             
-
-
         }
 
 
-        public Task<Funcion> DeleteFuncion(int FuncionId)
+        public Task<FuncionResponseDTO> DeleteFuncion(int FuncionId)
         {
-            throw new NotImplementedException();
+            return _command.DeleteFuncion(FuncionId);
         }
 
         public async Task<List<Funcion>> GetAll()
         {
             return await _query.GetListFunciones();
         }
-
-        public Task<Funcion> GetById(int FuncionId)
+        
+        public Task<FuncionResponseDTO> GetById(int FuncionId)
         {
+            //FuncionResponseDTO funcion= _query.GetFuncion(FuncionId).Result;
+            //return _command.
+
             throw new NotImplementedException();
         }
     }

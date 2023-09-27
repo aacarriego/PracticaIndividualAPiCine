@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APICineGBA.Controllers
@@ -27,7 +28,7 @@ namespace APICineGBA.Controllers
             {
                 var funcionResult = new FuncionDTO();
                 funcionResult.FuncionId = funcion.FuncionId;
-                funcionResult.Fecha= funcion.Fecha;
+                funcionResult.Fecha = funcion.Fecha;
                 listaDeFunciones.Add(funcionResult);
             }
             return new JsonResult(listaDeFunciones);
@@ -38,19 +39,28 @@ namespace APICineGBA.Controllers
 
         public async Task<IActionResult> CreateFuncion(FuncionRequestDTO request)
         {
-            var funcion= new Funcion
+            var funcion = new Funcion
             {
-                PeliculaId= request.PeliculaId, 
+                PeliculaId = request.PeliculaId,
                 Fecha = request.Fecha,
                 SalaId = request.SalaId,
                 Horario = request.Horario
             };
-         
-             var result= await _service.CreateFuncion(funcion);
+
+            var result = await _service.CreateFuncion(funcion);
 
             return new JsonResult(result);
 
         }
 
+        [HttpDelete]
+        public async Task<FuncionResponseDTO> DeleteFuncion(int FuncionId)
+        {
+            throw new NotImplementedException();
+        }
+        
+           
+        }
+
     }
-}
+

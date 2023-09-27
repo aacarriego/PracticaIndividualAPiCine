@@ -17,9 +17,10 @@ namespace Infrastructure.Querys
         {
             _context = context;
         }
-        public Funcion GetFuncion(int FuncionId)
+        public async Task <Funcion> GetFuncion(int FuncionId)
         {
-            throw new NotImplementedException();
+            return await _context.Funciones.FindAsync(FuncionId);
+
         }
 
         public async Task<List<Funcion>> GetListFunciones()
