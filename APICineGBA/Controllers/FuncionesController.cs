@@ -22,16 +22,9 @@ namespace APICineGBA.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var listaDeFunciones = new List<FuncionDTO>();
             var result = await _service.GetAll();
-            foreach (var funcion in result)
-            {
-                var funcionResult = new FuncionDTO();
-                funcionResult.FuncionId = funcion.FuncionId;
-                funcionResult.Fecha = funcion.Fecha;
-                listaDeFunciones.Add(funcionResult);
-            }
-            return new JsonResult(listaDeFunciones);
+
+            return new JsonResult(result);
 
         }
 

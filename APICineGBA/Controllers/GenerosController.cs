@@ -22,8 +22,6 @@ namespace APICineGBA.Controllers
         public async Task<IActionResult> GetAll()
         {
             var listaDeGeneros= new List<GeneroDTO>();
-        
-
             var result = await _service.GetAll();
             foreach (var genero in result)
             {

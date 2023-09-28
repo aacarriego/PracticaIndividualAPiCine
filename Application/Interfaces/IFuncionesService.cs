@@ -17,6 +17,6 @@ namespace Application.Interfaces
 
         Task<FuncionResponseDTO> GetById(int FuncionId);
 
-        Task<FuncionResponseDTO> DeleteFuncion(int FuncionId);
+        Task<FuncionDeleteResponseDTO> DeleteFuncion(int FuncionId);
     }
 }

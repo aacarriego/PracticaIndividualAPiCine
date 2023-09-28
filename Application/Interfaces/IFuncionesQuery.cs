@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.DTO;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Application.Interfaces
 {
     public interface IFuncionesQuery
     {
-       Task< List<Funcion>> GetListFunciones();
+         Task<List<Funcion>> GetListFunciones();
 
-        Task <Funcion> GetFuncion(int FuncionId);
+          Task <Funcion> GetFuncion(int FuncionId);
     }
 }

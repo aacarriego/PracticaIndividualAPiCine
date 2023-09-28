@@ -25,7 +25,7 @@ namespace Infrastructure.Command
             
         }
 
-        public async Task<FuncionResponseDTO> DeleteFuncion(int funcionId)
+        public async Task<FuncionDeleteResponseDTO> DeleteFuncion(int funcionId)
         {
 
             List<Funcion> funciones = await _context.Funciones.ToListAsync();
@@ -38,7 +38,9 @@ namespace Infrastructure.Command
 
             _context.Funciones.Remove(funcion);
 
-            return new FuncionResponseDTO
+            await _context.SaveChangesAsync();
+
+            return new FuncionDeleteResponseDTO
             {
                 FuncionId = funcion.FuncionId,
                 Fecha = funcion.Fecha,
@@ -49,10 +51,7 @@ namespace Infrastructure.Command
 
         public async Task<FuncionResponseDTO> InsertFuncion(Funcion request)
         {
-            /// uso libreria automapping  
-            /// 
-          ;
-
+           
             var funcion = new Funcion();
             funcion.Fecha = request.Fecha; 
             funcion.Horario = request.Horario;

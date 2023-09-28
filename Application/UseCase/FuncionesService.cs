@@ -29,14 +29,16 @@ namespace Application.UseCase
         }
 
 
-        public async Task<FuncionResponseDTO> DeleteFuncion(int FuncionId)
+        public async Task<FuncionDeleteResponseDTO> DeleteFuncion(int FuncionId)
         {
             return await _command.DeleteFuncion(FuncionId);
         }
 
-        public async Task<List<Funcion>> GetAll()
+        public  async Task<List<Funcion>> GetAll()
         {
             return await _query.GetListFunciones();
+          
+            
         }
 
         public async Task<FuncionResponseDTO> GetById(int FuncionId)
