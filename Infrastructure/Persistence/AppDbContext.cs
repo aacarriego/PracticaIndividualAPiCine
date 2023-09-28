@@ -39,7 +39,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(f => f.FuncionId);
                 entity.Property(f => f.FuncionId).ValueGeneratedOnAdd();
 
-                entity.HasOne(fun => fun.Peliculas)
+                entity.HasOne(fun => fun.Pelicula)
                       .WithMany(pel => pel.Funciones)
                       .HasForeignKey(fun => fun.PeliculaId);
 
@@ -53,7 +53,7 @@ namespace Infrastructure.Persistence
                 entity.Property(f => f.GeneroId).ValueGeneratedOnAdd();
 
                 entity.HasMany(gen => gen.Peliculas)
-                      .WithOne(pel => pel.genero)
+                      .WithOne(pel => pel.Genero)
                       .HasForeignKey(p => p.GeneroId);
 
             });
@@ -66,7 +66,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(f => f.SalaId);
                 entity.Property(f => f.SalaId).ValueGeneratedOnAdd();
                 entity.HasMany(s => s.Funciones)
-                      .WithOne(f => f.Salas)
+                      .WithOne(f => f.Sala)
                       .HasForeignKey(f => f.SalaId);
             });
 

@@ -34,9 +34,9 @@ namespace Application.UseCase
             return await _command.DeleteFuncion(FuncionId);
         }
 
-        public  async Task<List<Funcion>> GetAll()
+        public  async Task<List<FuncionResponseDTO>> GetAll(DateTime? fecha, string? tituloPelicula, int? generoId)
         {
-            return await _query.GetListFunciones();
+            return await _query.GetListFunciones( fecha , tituloPelicula , generoId );
           
             
         }

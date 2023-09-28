@@ -10,7 +10,7 @@ namespace Application.Interfaces
 {
     public interface IFuncionesQuery
     {
-         Task<List<Funcion>> GetListFunciones();
+         Task<List<FuncionResponseDTO>> GetListFunciones(DateTime? fecha = null, string tituloPelicula = null, int? generoId = null);
 
           Task <Funcion> GetFuncion(int FuncionId);
     }

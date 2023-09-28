@@ -13,7 +13,7 @@ namespace Application.Interfaces
     {
         Task<FuncionResponseDTO> CreateFuncion(Funcion request);
 
-        Task<List<Funcion>> GetAll();
+        Task<List<FuncionResponseDTO>> GetAll(DateTime? fecha, string? tituloPelicula, int? generoId);
 
         Task<FuncionResponseDTO> GetById(int FuncionId);
 

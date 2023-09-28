@@ -17,7 +17,7 @@ namespace Domain.Entities
         // FK
         public virtual int GeneroId { get; set; }
 
-        public Genero genero { get; set; }
+        public Genero Genero { get; set; }
 
         [StringLength(50)]
         public string Titulo { get; set; }

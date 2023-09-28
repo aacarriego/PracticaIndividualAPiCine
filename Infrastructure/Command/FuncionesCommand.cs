@@ -58,9 +58,9 @@ namespace Infrastructure.Command
             funcion.SalaId = request.SalaId;
             funcion.PeliculaId= request.PeliculaId;
             var pelicula= _context.Peliculas.Find(funcion.PeliculaId);
-            funcion.Peliculas = pelicula;  
+            funcion.Pelicula = pelicula;  
             var sala= _context.Salas.Find(funcion.SalaId);
-            funcion.Salas = sala;
+            funcion.Sala = sala;
             funcion.Tickets = new List<Ticket>(sala.Capacidad);
             _context.Add(funcion);
 

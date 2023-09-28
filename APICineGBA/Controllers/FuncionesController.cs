@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APICineGBA.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/Funcion")]
     [ApiController]
     public class FuncionesController : ControllerBase
     {
@@ -20,9 +20,9 @@ namespace APICineGBA.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(DateTime? fecha , string? tituloPelicula , int? generoId )
         {
-            var result = await _service.GetAll();
+            var result = await _service.GetAll(fecha,  tituloPelicula  , generoId);
 
             return new JsonResult(result);
 
@@ -49,9 +49,9 @@ namespace APICineGBA.Controllers
       
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFuncion(int FuncionId)
+        public async Task<IActionResult> DeleteFuncion(int id)
         {
-           var result = await _service.DeleteFuncion(FuncionId);
+           var result = await _service.DeleteFuncion(id);
 
             return new JsonResult(result);
         }
