@@ -1,7 +1,6 @@
 using Application.Interfaces;
 using Application.UseCase;
 using Application.UseCase.Peliculas;
-using AutoMapper;
 using Infrastructure.Command;
 using Infrastructure.Persistence;
 using Infrastructure.Querys;
