@@ -1,4 +1,5 @@
 ﻿using Application.DTO;
+using Application.UseCase;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,20 @@ namespace Application.Interfaces
 {
     public interface IFuncionesQuery
     {
-         Task<List<FuncionResponseDTO>> GetListFunciones(DateTime? fecha = null, string tituloPelicula = null, int? generoId = null);
+               
+        Task<List<FuncionResponseDTO>> ListFunciones( BuscadorFunciones buscador);
+        
+        Task<TicketIdResponseDTO> GetFuncionByTicketId(int FuncionId);
 
-          Task <Funcion> GetFuncion(int FuncionId);
+        Task<FuncionResponseDTO> GetFuncionById(int FuncionId);
+
+        List<Funcion> GetAllFunciones();
+
+        List<Funcion> GetFuncionesByPelicula(int PeliculaId);
+
+        List<Funcion> GetFuncionesByDia(DateTime dia);
+
+        List<Funcion> GetFuncionesByPeliculaIDyFecha(int peliculaId , DateTime fecha );
+
     }
 }

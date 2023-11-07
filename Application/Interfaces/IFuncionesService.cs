@@ -11,12 +11,29 @@ namespace Application.Interfaces
 {
     public interface IFuncionesService
     {
+        void CrearFuncion(int PeliculaId, int SalaId, DateTime fecha, TimeSpan hora);
+
         Task<FuncionResponseDTO> CreateFuncion(Funcion request);
 
-        Task<List<FuncionResponseDTO>> GetAll(DateTime? fecha, string? tituloPelicula, int? generoId);
+        Task<FuncionDetailDTO> DeleteFuncion(int FuncionId);
 
-        Task<FuncionResponseDTO> GetById(int FuncionId);
+        Task<FuncionResponseDTO> UpdateFuncion(int FuncionId);
 
-        Task<FuncionDeleteResponseDTO> DeleteFuncion(int FuncionId);
+       
+        Task<FuncionResponseDTO> GetFuncionById(int FuncionId);
+
+        Task<TickectResponseCantidadDTO> GetTickectsByFuncionId(int FuncionId);
+        Task<FuncionResponseDTO> ListarFunciones(BuscadorFunciones buscador);
+
+        Task<TicketNewDTOResponse> CrearTickeEnFuncion(int Id, TicketDTO ticket);
+        Task<TickectResponseCantidadDTO> TickectResponseCantidadDTO(int funcionId); 
+
+        List<Funcion> GetAllFunciones();
+
+        List<Funcion> GetFuncionesByPelicula(int PeliculaId);
+
+        List<Funcion> GetFuncionesByDia(DateTime dia);
+
+        List<Funcion> GetFuncionesByPeliculaIDyFecha(int peliculaId , DateTime fecha );
     }
 }

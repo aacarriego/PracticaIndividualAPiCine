@@ -7,16 +7,11 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public  class FuncionDTO
+    public class FuncionDTO
     {
-        public int FuncionId { get; set; }
-        public int SalaId { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public int Pelicula { get; set; }
+        public int Sala { get; set; }
         public DateTime Fecha { get; set; }
-
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
-        public DateTime Horario { get; set; }
-        public int PeliculaId { get; set; }
+        public string? Horario { get; set; }
     }
 }

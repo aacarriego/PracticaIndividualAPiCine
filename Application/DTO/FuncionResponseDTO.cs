@@ -11,12 +11,10 @@ namespace Application.DTO
     public class FuncionResponseDTO
     {
         public int FuncionId { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+       
         public DateTime Fecha { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
-        public DateTime Horario { get; set; }
+        public string Horario { get; set; }
 
         public SalaResponseDTO sala { get; set; }
 
@@ -25,16 +23,13 @@ namespace Application.DTO
 
     }
 
-
     public class SalaResponseDTO
     {
         public int SalaId { get; set; }
         public string Nombre{ get; set; }
-
         public int Capacidad { get; set; }
 
     }
-
 
     public class PeliculaResponseDTO
     {

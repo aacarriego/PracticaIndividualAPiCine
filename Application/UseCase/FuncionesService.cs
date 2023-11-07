@@ -1,4 +1,6 @@
-﻿using Application.DTO;
+﻿
+
+using Application.DTO;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Entities;
@@ -23,29 +25,69 @@ namespace Application.UseCase
             _command = command;
         }
 
-        public async Task<FuncionResponseDTO> CreateFuncion(Funcion request)
+        public void CrearFuncion(int PeliculaId, int SalaId, DateTime fecha, TimeSpan hora)
         {
-            return await _command.InsertFuncion(request);
+            throw new NotImplementedException();
         }
 
-
-        public async Task<FuncionDeleteResponseDTO> DeleteFuncion(int FuncionId)
+        public Task<TicketNewDTOResponse> CrearTickeEnFuncion(int Id, TicketDTO ticket)
         {
-            return await _command.DeleteFuncion(FuncionId);
+            throw new NotImplementedException();
         }
 
-        public  async Task<List<FuncionResponseDTO>> GetAll(DateTime? fecha, string? tituloPelicula, int? generoId)
+        public Task<FuncionResponseDTO> CreateFuncion(Funcion request)
         {
-            return await _query.GetListFunciones( fecha , tituloPelicula , generoId );
-          
-            
+            throw new NotImplementedException();
         }
 
-        public async Task<FuncionResponseDTO> GetById(int FuncionId)
+        public Task<FuncionDetailDTO> DeleteFuncion(int FuncionId)
         {
-            var funcion = await _query.GetFuncion(FuncionId);
+            throw new NotImplementedException();
+        }
 
-            return _mapper.Map<Funcion, FuncionResponseDTO>(funcion);
+        public List<Funcion> GetAllFunciones()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FuncionResponseDTO> GetFuncionById(int FuncionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Funcion> GetFuncionesByDia(DateTime dia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Funcion> GetFuncionesByPelicula(int PeliculaId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Funcion> GetFuncionesByPeliculaIDyFecha(int peliculaId, DateTime fecha)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TickectResponseCantidadDTO> GetTickectsByFuncionId(int FuncionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FuncionResponseDTO> ListarFunciones(BuscadorFunciones buscador)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TickectResponseCantidadDTO> TickectResponseCantidadDTO(int funcionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FuncionResponseDTO> UpdateFuncion(int FuncionId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

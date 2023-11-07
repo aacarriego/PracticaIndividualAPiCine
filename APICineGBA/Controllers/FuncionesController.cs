@@ -30,15 +30,23 @@ namespace APICineGBA.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> CreateFuncion(FuncionRequestDTO request)
+        public async Task<IActionResult> CreateFuncion(FuncionDTO request)
         {
             var funcion = new Funcion
             {
                 PeliculaId = request.PeliculaId,
                 Fecha = request.Fecha,
                 SalaId = request.SalaId,
-                Horario = request.Horario
+                //Horario = request.Horario
             };
+            if (TimeSpan.TryParse(request.Horario, out TimeSpan horario))
+            {
+                funcion.Horario = horario;
+            }
+            else
+            {
+                return new JsonResult(new { error = "Horario invalido" });
+            }   
 
             var result = await _service.CreateFuncion(funcion);
 

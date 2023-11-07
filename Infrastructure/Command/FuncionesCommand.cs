@@ -66,12 +66,11 @@ namespace Infrastructure.Command
 
             await _context.SaveChangesAsync();
 
-            // var funcionResponse = _mapper.Map<funcion>(request);
+        
             return new FuncionResponseDTO
             {
+                Horario= funcion.Horario,
                 FuncionId = funcion.FuncionId,
-
-                Horario = funcion.Horario,
                 Fecha = funcion.Fecha,
                 pelicula = new PeliculaResponseDTO
                 {
@@ -92,6 +91,11 @@ namespace Infrastructure.Command
                 }
 
             };
+        }
+
+        public Task<FuncionDetailDTO> UpdateFuncion(Funcion funcion)
+        {
+            throw new NotImplementedException();
         }
     }
 }

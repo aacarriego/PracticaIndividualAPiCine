@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.Interfaces;
+using Application.UseCase;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -20,100 +21,39 @@ namespace Infrastructure.Querys
             _context = context;
         }
 
-        //public async Task<List<FuncionResponseDTO>> GetListFunciones()
-        //{
-        //    var funciones = await _context.Funciones
-        //        .Include(f => f.Pelicula)
-        //            .ThenInclude(p => p.Genero)
-        //        .Include(f => f.Sala)
-        //        .ToListAsync();
-
-        //    var funcionesDto = funciones.Select(funcion => new FuncionResponseDTO
-        //    {
-        //        FuncionId = funcion.FuncionId,
-        //        Fecha = funcion.Fecha,
-        //        Horario = funcion.Horario,
-        //        pelicula = new PeliculaResponseDTO
-        //        {
-        //            PeliculaId = funcion.PeliculaId,
-        //            Titulo = funcion.Pelicula.Titulo,
-        //            Poster = funcion.Pelicula.Poster,
-        //            genero = new GeneroResponseDTO
-        //            {
-        //                GeneroId = funcion.Pelicula.Genero.GeneroId,
-        //                Nombre = funcion.Pelicula.Genero.Nombre,
-        //            }
-        //        },
-        //        sala = new SalaResponseDTO
-        //        {
-        //            SalaId = funcion.SalaId,
-        //            Nombre = funcion.Sala.Nombre,
-        //            Capacidad = funcion.Sala.Capacidad,
-        //        }
-        //    });
-
-        //    return funcionesDto.ToList();
-        //}
-
-
-        public async Task<List<FuncionResponseDTO>> GetListFunciones(DateTime? fecha, string? tituloPelicula, int? generoId)
+        public List<Funcion> GetAllFunciones()
         {
-            var query = _context.Funciones
-                .Include(f => f.Pelicula)
-                    .ThenInclude(p => p.Genero)
-                .Include(f => f.Sala)
-                .AsQueryable(); // Convierte la consulta en una IQueryable para agregar condiciones de filtro dinámicamente
-
-            // Aplica los filtros según los parámetros proporcionados
-            if (fecha.HasValue)
-            {
-                query = query.Where(funcion => funcion.Fecha.Date == fecha.Value.Date);
-            }
-
-            if (!string.IsNullOrEmpty(tituloPelicula))
-            {
-                query = query.Where(funcion => funcion.Pelicula.Titulo.Contains(tituloPelicula));
-            }
-
-            if (generoId.HasValue)
-            {
-                query = query.Where(funcion => funcion.Pelicula.GeneroId == generoId.Value);
-            }
-
-            var funciones = await query.ToListAsync();
-
-            var funcionesDto = funciones.Select(funcion => new FuncionResponseDTO
-            {
-                FuncionId = funcion.FuncionId,
-                Fecha = funcion.Fecha,
-                Horario = funcion.Horario,
-                pelicula = new PeliculaResponseDTO
-                {
-                    PeliculaId = funcion.PeliculaId,
-                    Titulo = funcion.Pelicula.Titulo,
-                    Poster = funcion.Pelicula.Poster,
-                    genero = new GeneroResponseDTO
-                    {
-                        GeneroId = funcion.Pelicula.Genero.GeneroId,
-                        Nombre = funcion.Pelicula.Genero.Nombre,
-                    }
-                },
-                sala = new SalaResponseDTO
-                {
-                    SalaId = funcion.SalaId,
-                    Nombre = funcion.Sala.Nombre,
-                    Capacidad = funcion.Sala.Capacidad,
-                }
-            });
-
-            return funcionesDto.ToList();
+            throw new NotImplementedException();
         }
 
-
-        public async Task<Funcion> GetFuncion(int FuncionId)
+        public Task<FuncionResponseDTO> GetFuncionById(int FuncionId)
         {
-            return await _context.Funciones.FindAsync(FuncionId);
+            throw new NotImplementedException();
+        }
 
+        public Task<TicketIdResponseDTO> GetFuncionByTicketId(int FuncionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Funcion> GetFuncionesByDia(DateTime dia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Funcion> GetFuncionesByPelicula(int PeliculaId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Funcion> GetFuncionesByPeliculaIDyFecha(int peliculaId, DateTime fecha)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<FuncionResponseDTO>> ListFunciones(BuscadorFunciones buscador)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class FuncionRequestDTO
+    public class FuncionDetailDTO
     {
-        public int PeliculaId { get; set; }
-        public int SalaId { get; set; }      
+        public int FuncionId { get; set; }
         public DateTime Fecha { get; set; }
-        public DateTime Horario { get; set; }
+        public string Horario { get; set; }
+
     }
-
-
 }
