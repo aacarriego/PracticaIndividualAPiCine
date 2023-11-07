@@ -1,5 +1,7 @@
 ﻿using Application.DTO;
+using Application.ErrorHandler;
 using Application.Interfaces;
+using Application.UseCase;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -20,11 +22,39 @@ namespace APICineGBA.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(DateTime? fecha , string? tituloPelicula , int? generoId )
+        [ProducesResponseType(typeof(FuncionDTO), 200)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 500)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
+        public async Task<IActionResult> GetAll(string? fecha , string? tituloPelicula , int? generoId )
         {
-            var result = await _service.GetAll(fecha,  tituloPelicula  , generoId);
+            var buscador= new BuscadorFunciones
+            {
+                Fecha = fecha,
+                Titulo = tituloPelicula,
+                Genero = generoId
+            };
 
-            return new JsonResult(result);
+            try
+            {
+                var result = await _service.ListarFunciones(buscador);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (ElementNotFoundException e)
+            {
+                return NotFound(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }  
 
         }
 

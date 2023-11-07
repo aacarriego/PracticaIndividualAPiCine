@@ -1,16 +1,9 @@
 ﻿using Application.DTO;
 using Application.Interfaces;
-using AutoMapper;
-using Azure.Core;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Infrastructure.Command
 {
@@ -23,6 +16,11 @@ namespace Infrastructure.Command
         {
             _context = context;
             
+        }
+
+        public void CrearFuncion(Funcion funcion)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<FuncionDeleteResponseDTO> DeleteFuncion(int funcionId)
@@ -94,6 +92,16 @@ namespace Infrastructure.Command
         }
 
         public Task<FuncionDetailDTO> UpdateFuncion(Funcion funcion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FuncionResponseDTO> UpdateFuncion(int funcionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<FuncionDetailDTO> IFuncionesCommand.DeleteFuncion(int funcionId)
         {
             throw new NotImplementedException();
         }
