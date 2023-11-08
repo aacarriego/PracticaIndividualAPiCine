@@ -67,7 +67,7 @@ namespace APICineGBA.Controllers
                 PeliculaId = request.PeliculaId,
                 Fecha = request.Fecha,
                 SalaId = request.SalaId,
-                //Horario = request.Horario
+                Horario = request.Horario
             };
             if (TimeSpan.TryParse(request.Horario, out TimeSpan horario))
             {

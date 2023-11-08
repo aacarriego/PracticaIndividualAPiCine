@@ -20,90 +20,37 @@ namespace Infrastructure.Command
 
         public void CrearFuncion(Funcion funcion)
         {
-            throw new NotImplementedException();
+            _context.Funciones.Add(funcion);
+            _context.SaveChanges();
         }
 
-        public async Task<FuncionDeleteResponseDTO> DeleteFuncion(int funcionId)
+        public  Task<FuncionResponseDTO> InsertFuncion(Funcion funcion)
         {
 
-            List<Funcion> funciones = await _context.Funciones.ToListAsync();
-
-            if (funciones == null && funciones.Count > 0) 
+            _context.Funciones.Add(funcion);
+            _context.SaveChanges();
+            return Task.FromResult(new FuncionResponseDTO
             {
-                throw new Exception(" no existe ");
-            }
-            var funcion = await _context.Funciones.FindAsync(funcionId);    
 
-            _context.Funciones.Remove(funcion);
+            });
 
-            await _context.SaveChangesAsync();
-
-            return new FuncionDeleteResponseDTO
-            {
-                FuncionId = funcion.FuncionId,
-                Fecha = funcion.Fecha,
-                Horario = funcion.Horario,
-               
-            };
         }
 
-        public async Task<FuncionResponseDTO> InsertFuncion(Funcion request)
+        public Task<FuncionDetailDTO> DeleteFuncion(int funcionId)
         {
-           
-            var funcion = new Funcion();
-            funcion.Fecha = request.Fecha; 
-            funcion.Horario = request.Horario;
-            funcion.SalaId = request.SalaId;
-            funcion.PeliculaId= request.PeliculaId;
-            var pelicula= _context.Peliculas.Find(funcion.PeliculaId);
-            funcion.Pelicula = pelicula;  
-            var sala= _context.Salas.Find(funcion.SalaId);
-            funcion.Sala = sala;
-            funcion.Tickets = new List<Ticket>(sala.Capacidad);
-            _context.Add(funcion);
-
-            await _context.SaveChangesAsync();
-
-        
-            return new FuncionResponseDTO
+            _context.Funciones.Remove(_context.Funciones.Find(funcionId));
+            _context.SaveChanges();
+            return Task.FromResult(new FuncionDetailDTO
             {
-                Horario= funcion.Horario,
-                FuncionId = funcion.FuncionId,
-                Fecha = funcion.Fecha,
-                pelicula = new PeliculaResponseDTO
-                {
-                    PeliculaId = funcion.PeliculaId,
-                    Titulo = pelicula.Titulo,
-                    Poster = pelicula.Poster,
-                    genero = new GeneroResponseDTO
-                    {
-                        GeneroId = pelicula.GeneroId,
-                        Nombre = _context.Generos.Find(pelicula.GeneroId).Nombre,
-                    }
-                },
-                sala = new SalaResponseDTO
-                {
-                    SalaId = funcion.SalaId,
-                    Nombre = _context.Salas.Find(funcion.SalaId).Nombre,
-                    Capacidad = sala.Capacidad,
-                }
 
-            };
+            }); 
+            
         }
-
-        public Task<FuncionDetailDTO> UpdateFuncion(Funcion funcion)
-        {
-            throw new NotImplementedException();
-        }
-
+             
         public Task<FuncionResponseDTO> UpdateFuncion(int funcionId)
         {
             throw new NotImplementedException();
         }
 
-        Task<FuncionDetailDTO> IFuncionesCommand.DeleteFuncion(int funcionId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
