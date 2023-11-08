@@ -49,7 +49,7 @@ namespace Application.UseCase
 
         public Task<TicketNewDTOResponse> CrearTickeEnFuncion(int Id, TicketDTO ticketsPedidos)
         {
-            List<TicketIdResponseDTO> tickets = new();
+             List<TicketIdResponseDTO> tickets = new();
             var funcion = _FunQuery.GetFuncionById(Id);
             var sala = _salaQuery.GetById(funcion.Result.sala.SalaId);
             var pelicula = _peliculaQuery.GetPelicula(funcion.Result.pelicula.PeliculaId);
@@ -75,7 +75,7 @@ namespace Application.UseCase
                     Usuario = ticketsPedidos.Usuario,
 
                 };
-                tickets.Add(new TicketIdResponseDTO { ticketId = nuevoTicket.TicketId });
+                tickets.Add(new TicketIdResponseDTO { TicketId = nuevoTicket.TicketId });
                 var response = _ticketCommand.CrearTicket(nuevoTicket);
 
             }
@@ -107,7 +107,6 @@ namespace Application.UseCase
                     Horario = funcion.Result.Horario.ToString()
                 },
                 Usuario = ticketsPedidos.Usuario,
-
 
             });
         }

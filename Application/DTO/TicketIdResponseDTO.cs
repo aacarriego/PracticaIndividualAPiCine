@@ -8,6 +8,6 @@ namespace Application.DTO
 {
     public class TicketIdResponseDTO
     {
-        public Guid ticketId { get; set; }
+        public Guid TicketId { get; set; }
     }
 }
