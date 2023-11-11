@@ -20,11 +20,18 @@ namespace APICineGBA.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(DateTime? fecha , string? tituloPelicula , int? generoId )
+        public async Task<IActionResult> GetAll(DateTime? fecha, string? pelicula , int? genero )
         {
-            var result = await _service.GetAll(fecha,  tituloPelicula  , generoId);
+            try 
+            {
+                var result = await _service.GetAll(fecha, pelicula, genero);
 
-            return new JsonResult(result);
+                return new JsonResult(result) { StatusCode = 200 };
+            } 
+            catch 
+            {
+                return BadRequest("Ingresó un dato inválido");
+            }
 
         }
 
