@@ -14,12 +14,10 @@ namespace Infrastructure.Command
     {
         private readonly AppDbContext _context;
 
-        /// constructor
         public PeliculasCommand(AppDbContext context)
         {
             _context = context;
         }
-        //ABMC
         public Task DeletePelicula(int peliculaId)
         {
             throw new NotImplementedException();
