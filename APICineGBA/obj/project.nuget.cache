@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pjSVqyfESPkdPLKfKxZsWbgpNCSY/89b2rTvwviZO8rp2RsN0CIFg3yBH4fSeQC50Jm3OOIhlGFtd1bSzA9WWQ==",
+  "dgSpecHash": "S10tn18r8dVHeYJexJQI9oFrqJ5mewNNaZoRqA/6iPokkUw8oBia+FUgr21UxrBqB0eMGzUkIb53IavYcA5aZg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\APICineGBA\\APICineGBA.csproj",
+  "projectFilePath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\APICineGBA\\APICineGBA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aacar\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
