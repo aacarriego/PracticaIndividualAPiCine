@@ -27,6 +27,27 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
+      "SharpCompress/0.34.1": {
+        "type": "package",
+        "dependencies": {
+          "ZstdSharp.Port": "0.7.2"
+        },
+        "compile": {
+          "lib/net7.0/SharpCompress.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0/SharpCompress.dll": {}
+        }
+      },
+      "ZstdSharp.Port/0.7.2": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/ZstdSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0/ZstdSharp.dll": {}
+        }
+      },
       "Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -124,6 +145,40 @@
         "version.txt"
       ]
     },
+    "SharpCompress/0.34.1": {
+      "sha512": "WttRM/J/ktUwM3hRPxRYux1AOT+TGLqab34ZNBGTZRChHtpkJXFGHJ/cZCyNOH0OqpCNDdOsHhzxOVYkx4WoGw==",
+      "type": "package",
+      "path": "sharpcompress/0.34.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net462/SharpCompress.dll",
+        "lib/net6.0/SharpCompress.dll",
+        "lib/net7.0/SharpCompress.dll",
+        "lib/netstandard2.0/SharpCompress.dll",
+        "lib/netstandard2.1/SharpCompress.dll",
+        "sharpcompress.0.34.1.nupkg.sha512",
+        "sharpcompress.nuspec"
+      ]
+    },
+    "ZstdSharp.Port/0.7.2": {
+      "sha512": "mT6Pb7qzDGapJ2ic4dAFqbzHpM+qgnasQIGR/Sofrk0fmKTQSTljG55OFXHbDJczLZWnUAFsg4bKR81uHiKzPg==",
+      "type": "package",
+      "path": "zstdsharp.port/0.7.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/ZstdSharp.dll",
+        "lib/net5.0/ZstdSharp.dll",
+        "lib/net6.0/ZstdSharp.dll",
+        "lib/net7.0/ZstdSharp.dll",
+        "lib/netcoreapp3.1/ZstdSharp.dll",
+        "lib/netstandard2.0/ZstdSharp.dll",
+        "lib/netstandard2.1/ZstdSharp.dll",
+        "zstdsharp.port.0.7.2.nupkg.sha512",
+        "zstdsharp.port.nuspec"
+      ]
+    },
     "Domain/1.0.0": {
       "type": "project",
       "path": "../Domain/Domain.csproj",
@@ -133,7 +188,8 @@
   "projectFileDependencyGroups": {
     "net7.0": [
       "AutoMapper >= 12.0.1",
-      "Domain >= 1.0.0"
+      "Domain >= 1.0.0",
+      "SharpCompress >= 0.34.1"
     ]
   },
   "packageFolders": {
@@ -142,11 +198,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\aacar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Application\\obj\\",
+      "outputPath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\aacar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -163,8 +219,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj"
+            "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Domain\\Domain.csproj"
             }
           }
         }
@@ -182,6 +238,10 @@
           "AutoMapper": {
             "target": "Package",
             "version": "[12.0.1, )"
+          },
+          "SharpCompress": {
+            "target": "Package",
+            "version": "[0.34.1, )"
           }
         },
         "imports": [

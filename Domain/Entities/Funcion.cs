@@ -19,11 +19,8 @@ namespace Domain.Entities
         /// FK2
         public int SalaId { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Fecha { get; set; }
 
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
         public TimeSpan Horario { get; set; }
 
         public virtual Pelicula Pelicula { get; set; }

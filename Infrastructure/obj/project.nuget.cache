@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AdKOtLI7UFI64rKJzzcn9azd825PIgGiwp79NKSYVyLCCWuwyuOLo7+p6rGTuJHLEfdteVXJ/PCuszRvY8hLwQ==",
+  "dgSpecHash": "rs/Zf5HpFm/Bo3wFHno1yRYzBetKY+zcp/TOGg3quX5mfxZ0GSIi9mXZJUeGY6ijHf580ud3UpbAQOAUNKRM6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aacar\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
@@ -42,6 +42,7 @@
     "C:\\Users\\aacar\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\aacar\\.nuget\\packages\\sharpcompress\\0.34.1\\sharpcompress.0.34.1.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.1\\system.configuration.configurationmanager.6.0.1.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
@@ -64,7 +65,8 @@
     "C:\\Users\\aacar\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\aacar\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\aacar\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
+    "C:\\Users\\aacar\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
+    "C:\\Users\\aacar\\.nuget\\packages\\zstdsharp.port\\0.7.2\\zstdsharp.port.0.7.2.nupkg.sha512"
   ],
   "logs": []
 }

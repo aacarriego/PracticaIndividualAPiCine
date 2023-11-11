@@ -1,10 +1,14 @@
-﻿using Application.Interfaces;
+﻿using Application.DTO;
+using Application.ErrorHandler;
+using Application.Interfaces;
+using Application.UseCase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APICineGBA.Controllers
 {
-    [Route("api/[controller]")]
+    
+    [Route("api/v1/Pelicula")]
     [ApiController]
     public class PeliculasController : ControllerBase
     {
@@ -18,13 +22,81 @@ namespace APICineGBA.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        // GET api/<PeliculaController>/5
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(PeliculasDTO), 200)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
+        public async Task<IActionResult> GetPeliculaById(int id)
         {
-            var result = await _service.GetAll();
-            return new JsonResult(result);
+            try
+            {
+                var result = await _service.GetPeliculaById(id);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (ElementNotFoundException e)
+            {
+                return NotFound(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
         }
-        
-       
+
+
+        // PUT api/<PeliculaController>/5
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(PeliculaDTO), 200)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 500)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 409)]
+        public async Task<IActionResult> UpdatePelicula(int id, PeliculaDTO request)
+        {
+            var PeliculaEditar = new PeliculaDTO
+            {
+                Titulo = request.Titulo,
+                Poster = request.Poster,
+                Trailer = request.Trailer,
+                Sinopsis = request.Sinopsis,
+                genero = request.genero
+            };
+            try
+            {
+                var result = await _service.ActualizarPelicula(id, PeliculaEditar);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (ElementNotFoundException e)
+            {
+                return NotFound(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+
+                });
+            }
+            catch (ElementAlreadyExistException e)
+            {
+                return Conflict(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+        }
+
     }
 }

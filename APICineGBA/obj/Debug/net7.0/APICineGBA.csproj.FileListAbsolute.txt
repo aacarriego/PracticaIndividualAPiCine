@@ -166,3 +166,5 @@ C:\Users\aacar\Source\Repos\PracticaIndividualAPiCine\APICineGBA\obj\Debug\net7.
 C:\Users\aacar\Source\Repos\PracticaIndividualAPiCine\APICineGBA\obj\Debug\net7.0\APICineGBA.csproj.CopyComplete
 C:\Users\aacar\Source\Repos\PracticaIndividualAPiCine\APICineGBA\obj\Debug\net7.0\APICineGBA.genruntimeconfig.cache
 C:\Users\aacar\Source\Repos\PracticaIndividualAPiCine\APICineGBA\obj\Debug\net7.0\ref\APICineGBA.dll
+C:\Users\aacar\source\repos\PracticaIndividualAPiCine\APICineGBA\bin\Debug\net7.0\SharpCompress.dll
+C:\Users\aacar\source\repos\PracticaIndividualAPiCine\APICineGBA\bin\Debug\net7.0\ZstdSharp.dll

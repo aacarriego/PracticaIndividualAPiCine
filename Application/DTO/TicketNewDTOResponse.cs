@@ -10,7 +10,7 @@ namespace Application.DTO
     {
         public string Usuario { get; set; }
 
-        public LinkedList<TicketIdResponseDTO> Tickets { get; set; }
+        public List<TicketIdResponseDTO> Tickets { get; set; }
 
         public FuncionResponseDTO Funcion { get; set; }
     }

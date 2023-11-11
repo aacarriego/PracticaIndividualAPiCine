@@ -36,14 +36,16 @@ namespace Application.UseCase
             throw new NotImplementedException();
         }
 
-        public Task<List<Pelicula>> GetAll()
+        public List<Pelicula> GetAll()
         {
-            throw new NotImplementedException();
+          return _query.GetAllPeliculas();
         } 
 
         public Task<Pelicula> GetPeliculaById(int PeliculaId)
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

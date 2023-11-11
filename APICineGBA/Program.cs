@@ -41,6 +41,18 @@ builder.Services.AddScoped<IGenerosCommand, GenerosCommand>();
 builder.Services.AddScoped<IFuncionesService, FuncionesService>();
 builder.Services.AddScoped<IFuncionesCommand, FuncionesCommand>();
 builder.Services.AddScoped<IFuncionesQuery, FuncionesQuery>();
+builder.Services.AddScoped<ITicketCommand, TicketCommand>();
+builder.Services.AddScoped<ITicketQuery, TicketQuery>();
+builder.Services.AddScoped<ITicketCommand,TicketCommand>();
+builder.Services.AddScoped<ISalaQuery,SalaQuery>();
+builder.Services.AddScoped<ISalaService,SalaService>();
+builder.Services.AddScoped<IPeliculaQuery,PeliculaQuery>();
+builder.Services.AddScoped<IPeliculaService,PeliculaService>();
+builder.Services.AddScoped<IGeneroQuery,GeneroQuery>();
+builder.Services.AddScoped<IGeneroService,GeneroService>();
+builder.Services.AddScoped<IGenerosCommand,GenerosCommand>();
+builder.Services.AddScoped<IPeliculasCommand,PeliculasCommand>();
+
 
 /// agregar automapper
 /// 

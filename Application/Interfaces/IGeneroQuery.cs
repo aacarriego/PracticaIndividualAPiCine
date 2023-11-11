@@ -11,7 +11,7 @@ namespace Application.Interfaces
     {
         List<Genero> GetListGenero();
 
-        Genero GetGenero(int GeneroId);   
+        Task<Genero> GetGenero(int GeneroId);   
 
     }
 }

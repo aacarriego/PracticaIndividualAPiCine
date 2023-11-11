@@ -22,7 +22,7 @@ namespace Application.UseCase
             return _salaQuery.GetAll();
         }
 
-        public Sala GetById(int id)
+        public Task<Sala> GetById(int id)
         {
           return _salaQuery.GetById(id);
         }

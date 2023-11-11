@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class PeliculasResponseDTO
+    public class PeliculasResponseDetailDTO
     {
         public int PeliculaId { get; set; }
         public string Titulo { get; set; }
@@ -14,6 +14,6 @@ namespace Application.DTO
         public string Trailer { get; set; }
         public string Poster { get; set; }
         public GeneroResponseDTO genero { get; set; }
-        public LinkedList<FuncionDetailDTO> funciones { get; set; }
+        public List<FuncionDetailDTO> funciones { get; set; }
     }
 }

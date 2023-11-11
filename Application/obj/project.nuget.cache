@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "scpmSL7Rxi74QkyCvqgqThSbLeJdmJDQ5dDov6zlbn5sqnJIU90LzWprRMrJuM16Kw88QTCbIa0jeSPuRkdGNA==",
+  "dgSpecHash": "jm9bs4u0XKh536WeK/Tp81GvcVNrbI+D160FBz/z5DV5Un+nyYZLXinDUqtelL5dn9tzfC/zGdg+1VxUgm6f/Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Application\\Application.csproj",
+  "projectFilePath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aacar\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
-    "C:\\Users\\aacar\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+    "C:\\Users\\aacar\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\aacar\\.nuget\\packages\\sharpcompress\\0.34.1\\sharpcompress.0.34.1.nupkg.sha512",
+    "C:\\Users\\aacar\\.nuget\\packages\\zstdsharp.port\\0.7.2\\zstdsharp.port.0.7.2.nupkg.sha512"
   ],
   "logs": []
 }

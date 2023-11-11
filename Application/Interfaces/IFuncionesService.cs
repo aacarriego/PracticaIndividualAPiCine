@@ -22,10 +22,10 @@ namespace Application.Interfaces
        
         Task<FuncionResponseDTO> GetFuncionById(int FuncionId);
 
-        Task<TickectResponseCantidadDTO> GetTickectsByFuncionId(int FuncionId);
-        Task<FuncionResponseDTO> ListarFunciones(BuscadorFunciones buscador);
+         Task<TickectResponseCantidadDTO> GetTickectsByFuncionId(int FuncionId);
+        Task<List<FuncionResponseDTO>> ListarFunciones(BuscadorFunciones buscador);
 
-        Task<TicketNewDTOResponse> CrearTickeEnFuncion(int Id, TicketDTO ticket);
+        Task<TicketNewDTOResponse> CrearTicketEnFuncion(int funcionId, TicketDTO ticketsPedidos);
         Task<TickectResponseCantidadDTO> TickectResponseCantidadDTO(int funcionId); 
 
         List<Funcion> GetAllFunciones();

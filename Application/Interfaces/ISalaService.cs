@@ -10,6 +10,6 @@ namespace Application.Interfaces
     public interface ISalaService
     {
         List<Sala> GetAll();
-        Sala GetById(int id);
+        Task<Sala> GetById(int id);
     }
 }

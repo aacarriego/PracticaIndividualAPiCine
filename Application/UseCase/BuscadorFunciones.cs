@@ -8,7 +8,7 @@ namespace Application.UseCase
 {
     public class BuscadorFunciones
     {
-        public int? Genero { get; set; }
+        public int? GeneroId { get; set; }
         public string? Titulo { get; set; }
         public string? Fecha { get; set; }
     }

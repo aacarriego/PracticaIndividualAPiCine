@@ -1,18 +1,24 @@
 ﻿
 
 using Application.DTO;
+using Application.ErrorHandler;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Entities;
+using SharpCompress;
+using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.UseCase
-{ 
-   public class FuncionesService : IFuncionesService
+{
+    public class FuncionesService : IFuncionesService
     {
         private readonly IMapper _mapper;
         private readonly IFuncionesQuery _FunQuery;
@@ -44,82 +50,165 @@ namespace Application.UseCase
                 Fecha = fecha,
                 Horario = hora
             };
-          
+
         }
 
-        public Task<TicketNewDTOResponse> CrearTickeEnFuncion(int Id, TicketDTO ticketsPedidos)
+      
+
+        public async Task<TicketNewDTOResponse> CrearTicketEnFuncion(int funcionId, TicketDTO ticketsPedidos)
         {
-             List<TicketIdResponseDTO> tickets = new();
-            var funcion = _FunQuery.GetFuncionById(Id);
-            var sala = _salaQuery.GetById(funcion.Result.sala.SalaId);
-            var pelicula = _peliculaQuery.GetPelicula(funcion.Result.pelicula.PeliculaId);
-            var genero = _generoQuery.GetGenero(pelicula.GeneroId);
-            var SoldTickets = _ticketQuery.GetAll().Where(x => x.FuncionId == Id).ToList();
-            var cantidadDisponibles = sala.Capacidad - SoldTickets.Count();
-            if (cantidadDisponibles < ticketsPedidos.Cantidad)
+            var funcion = await _FunQuery.GetFuncionById(funcionId);
+            var salaId = funcion.sala.SalaId;
+            var peliculaId = funcion.pelicula.PeliculaId;
+            var generoId = ( _peliculaQuery.GetPelicula(peliculaId)).GeneroId;
+            var cantidadDisponibles = funcion.sala.Capacidad - _ticketQuery.GetAll().Count(x => x.FuncionId == funcionId);
+
+            if (ticketsPedidos.Cantidad > cantidadDisponibles)
             {
                 throw new Exception("No hay suficientes tickets disponibles");
-
             }
+
+            var tickets = new List<TicketIdResponseDTO>();
+
             for (int i = 0; i < ticketsPedidos.Cantidad; i++)
             {
-                if (SoldTickets.Count == sala.Capacidad)
+                if (cantidadDisponibles == 0)
                 {
-                    throw new Exception("No hay suficientes tickets disponibles en la funcion");
+                    throw new Exception("No hay suficientes tickets disponibles en la función");
                 }
 
                 var nuevoTicket = new Ticket
                 {
-                    TicketId = new Guid(),
-                    FuncionId = funcion.Result.FuncionId,
+                    TicketId = Guid.NewGuid(),
+                    FuncionId = funcionId,
                     Usuario = ticketsPedidos.Usuario,
-
                 };
-                tickets.Add(new TicketIdResponseDTO { TicketId = nuevoTicket.TicketId });
-                var response = _ticketCommand.CrearTicket(nuevoTicket);
 
+                tickets.Add(new TicketIdResponseDTO { TicketId = nuevoTicket.TicketId });
+                await _ticketCommand.CrearTicket(nuevoTicket);
+                cantidadDisponibles--;
             }
 
-            return Task.FromResult(new TicketNewDTOResponse
+            var pelicula =  _peliculaQuery.GetPelicula(peliculaId);
+            var sala = await _salaQuery.GetById(salaId);
+            var genero = await _generoQuery.GetGenero(generoId);
+
+            var funcionResponse = new FuncionResponseDTO
+            {
+                FuncionId = funcionId,
+                pelicula = new PeliculaResponseDTO
+                {
+                    PeliculaId = peliculaId,
+                    Titulo = pelicula.Titulo,
+                    Poster = pelicula.Poster,
+                    genero = new GeneroResponseDTO
+                    {
+                        GeneroId = generoId,
+                        Nombre = genero.Nombre
+                    }
+                },
+                sala = new SalaResponseDTO
+                {
+                    SalaId = salaId,
+                    Nombre = sala.Nombre,
+                    Capacidad = sala.Capacidad
+                },
+                Fecha = funcion.Fecha,
+                Horario = funcion.Horario.ToString()
+            };
+
+            return new TicketNewDTOResponse
             {
                 Tickets = tickets,
-                Funcion = new FuncionResponseDTO
+                Funcion = funcionResponse,
+                Usuario = ticketsPedidos.Usuario
+            };
+        }
+
+        
+
+        public async Task<FuncionResponseDTO> CreateFuncion(Funcion request)
+        {
+            var listaFunciones =  _FunQuery.GetAllFunciones() ?? throw new Exception("No hay funciones");
+
+            if (!DateTime.TryParse(request.Fecha.ToString(), out DateTime fecha) || !TimeSpan.TryParse(request.ToString(), out TimeSpan hora))
+            {
+                throw new InvalidFormatException("Formato de fecha u hora inválido");
+            }
+
+            var pelicula = _peliculaQuery.GetPelicula(request.PeliculaId) ?? throw new ElementNotFoundException("Película no encontrada");
+            var sala = _salaQuery.GetById(request.SalaId) ?? throw new ElementNotFoundException("Sala no encontrada");
+            var genero = _generoQuery.GetGenero(pelicula.GeneroId) ?? throw new ElementNotFoundException("Género no encontrado");
+
+            var funcion = new Funcion
+            {
+                Fecha = request.Fecha,
+                PeliculaId = request.PeliculaId,
+                SalaId = request.SalaId,
+                Horario = request.Horario,
+                Tickets = new List<Ticket>(sala.Result.Capacidad)
+            };
+
+            var horarioProximo = request.Horario.Add(new TimeSpan(2, 30, 0));
+            var horarioAnterior = request.Horario.Add(new TimeSpan(-2, 30, 0));
+
+            if (listaFunciones.Any(f => f.Fecha.Date == funcion.Fecha.Date && f.Horario == funcion.Horario && f.SalaId == funcion.SalaId))
+            {
+                throw new ElementAlreadyExistException("Ya existe una función para ese día y horario en esa sala");
+            }
+
+            if (listaFunciones.Any(f => f.Horario <= horarioProximo && f.Horario >= horarioAnterior && f.SalaId == funcion.SalaId && f.Fecha.Date == funcion.Fecha.Date))
+            {
+                throw new ElementAlreadyExistException("No se puede crear una función para ese día y horario en esa sala, hay superposición horaria. Intente nuevamente");
+            }
+
+            var response = await _FunCommand.InsertFuncion(funcion);
+
+            response.FuncionId = funcion.FuncionId;
+            response.pelicula = new PeliculaResponseDTO
+            {
+                PeliculaId = pelicula.PeliculaId,
+                Titulo = pelicula.Titulo,
+                Poster = pelicula.Poster,
+                genero = new GeneroResponseDTO
                 {
-                    FuncionId = funcion.Result.FuncionId,
-                    pelicula = new PeliculaResponseDTO
-                    {
-                        PeliculaId = pelicula.PeliculaId,
-                        Titulo = pelicula.Titulo,
-                        Poster = pelicula.Poster,
-                        genero = new GeneroResponseDTO
-                        {
-                            GeneroId = genero.GeneroId,
-                            Nombre = genero.Nombre
-                        }
-                    },
-                    sala = new SalaResponseDTO
-                    {
-                        SalaId = sala.SalaId,
-                        Nombre = sala.Nombre,
-                        Capacidad = sala.Capacidad
-                    },
-                    Fecha = funcion.Result.Fecha,
-                    Horario = funcion.Result.Horario.ToString()
-                },
-                Usuario = ticketsPedidos.Usuario,
+                    GeneroId = genero.Result.GeneroId,
+                    Nombre = genero.Result.Nombre
+                }
+            };
 
-            });
+            response.sala = new SalaResponseDTO
+            {
+                SalaId = sala.Result.SalaId,
+                Nombre = sala.Result.Nombre,
+                Capacidad = sala.Result.Capacidad
+            };
+
+            response.Fecha = funcion.Fecha;
+            response.Horario = funcion.Horario.ToString();
+
+            return response;
         }
 
-        public Task<FuncionResponseDTO> CreateFuncion(Funcion request)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<FuncionDetailDTO> DeleteFuncion(int funcionId)
+{
+    var funcion = _FunQuery.GetFuncionById(funcionId) ?? throw new ElementNotFoundException("Función no encontrada");
 
-        public Task<FuncionDetailDTO> DeleteFuncion(int FuncionId)
-        {
-            throw new NotImplementedException();
-        }
+    if (TickectResponseCantidadDTO(funcionId).Result.Cantidad > 0)
+    {
+        throw new ElementAlreadyExistException("No se puede eliminar la función porque hay tickets vendidos");
+    }
+
+    var response = await _FunCommand.DeleteFuncion(funcionId);
+
+    return new FuncionDetailDTO
+    {
+        FuncionId = funcion.Result.FuncionId,
+        Fecha = funcion.Result.Fecha,
+        Horario = funcion.Result.Horario.ToString()
+    };
+}
+
 
         public List<Funcion> GetAllFunciones()
         {
@@ -128,32 +217,117 @@ namespace Application.UseCase
 
         public Task<FuncionResponseDTO> GetFuncionById(int FuncionId)
         {
-            throw new NotImplementedException();
+            return _FunQuery.GetFuncionById(FuncionId) ?? throw new ElementNotFoundException("No hay funciones para ese id");
         }
 
         public List<Funcion> GetFuncionesByDia(DateTime dia)
         {
-            throw new NotImplementedException();
+            return _FunQuery.GetFuncionesByDia(dia) ?? throw new ElementNotFoundException("No hay funciones para ese día");
         }
 
         public List<Funcion> GetFuncionesByPelicula(int PeliculaId)
         {
-            throw new NotImplementedException();
+            return  _FunQuery.GetFuncionesByPelicula(PeliculaId) ?? throw new ElementNotFoundException("No hay funciones para esa película");
         }
 
         public List<Funcion> GetFuncionesByPeliculaIDyFecha(int peliculaId, DateTime fecha)
         {
-            throw new NotImplementedException();
+            return _FunQuery.GetFuncionesByPeliculaIDyFecha(peliculaId, fecha) ?? throw new ElementNotFoundException("No hay funciones para esa película y fecha");
         }
 
-        public Task<TickectResponseCantidadDTO> GetTickectsByFuncionId(int FuncionId)
+        public async Task<TickectResponseCantidadDTO> GetTickectsByFuncionId(int funcionId)
         {
-            throw new NotImplementedException();
+            var funcion = _FunQuery.GetFuncionById(funcionId) ?? throw new ElementNotFoundException("Función no encontrada");
+            var sala = _salaQuery.GetById(funcion.Result.sala.SalaId) ?? throw new ElementNotFoundException("Sala no encontrada");
+
+            var tickets = _ticketQuery.GetByFuncionId(funcionId);
+            var ticketsVendidos = tickets.Count;
+            var ticketsDisponibles = sala.Result.Capacidad - ticketsVendidos;
+
+            return new TickectResponseCantidadDTO
+            {
+                Cantidad = ticketsDisponibles
+            };
         }
 
-        public Task<FuncionResponseDTO> ListarFunciones(BuscadorFunciones buscador)
+        public Task<List<FuncionResponseDTO>> ListarFunciones(BuscadorFunciones buscador)
         {
-            throw new NotImplementedException();
+            var funciones = _FunQuery.GetAllFunciones();
+
+            if (buscador.GeneroId != null)
+            {
+                ValidarGenero(buscador.GeneroId);
+
+                var peliculasFiltradas = _peliculaQuery.GetAllPeliculas().Where(p => p.GeneroId == buscador.GeneroId).ToList();
+                funciones = funciones.Where(x => peliculasFiltradas.Any(p => p.PeliculaId == x.PeliculaId)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(buscador.Titulo))
+            {
+                ValidarTitulo(buscador.Titulo);
+                funciones = funciones.Where(x => x.Pelicula.Titulo.Contains(buscador.Titulo)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(buscador.Fecha))
+            {
+                ValidarFecha(buscador.Fecha);
+                funciones = funciones.Where(x => x.Fecha.ToString("yyyy-MM-dd") == buscador.Fecha).ToList();
+            }
+
+            return Task.FromResult(funciones.Select(MapFuncionToDTO).ToList());
+        }
+
+        private void ValidarGenero(int? generoId)
+        {
+            var genero = _generoQuery.GetGenero(generoId.Value);
+            if (genero == null)
+            {
+                throw new ElementNotFoundException("No hay funciones para el género ingresado");
+            }
+        }
+
+        private void ValidarTitulo(string titulo)
+        {
+
+            if (!_peliculaQuery.Equals(titulo)) 
+            {
+                throw new ElementNotFoundException("No hay funciones para el título ingresado");
+            }
+        }
+
+        private void ValidarFecha(string fecha)
+        {
+            if (!_FunQuery.GetAllFunciones().Any(f => f.Fecha.ToString("yyyy-MM-dd") == fecha))
+            {
+                throw new ElementNotFoundException("No hay funciones para la fecha ingresada");
+            }
+        }
+
+        private FuncionResponseDTO MapFuncionToDTO(Funcion funcion)
+        {
+            return new FuncionResponseDTO
+            {
+                FuncionId = funcion.FuncionId,
+                pelicula = new PeliculaResponseDTO
+                {
+                    PeliculaId = funcion.PeliculaId,
+                    Titulo = _peliculaQuery.GetPelicula(funcion.PeliculaId).Titulo,
+                    Poster = _peliculaQuery.GetPelicula(funcion.PeliculaId).Poster,
+                    genero = new GeneroResponseDTO
+                    {
+                        GeneroId = _generoQuery.GetGenero(funcion.Pelicula.GeneroId).Result.GeneroId,
+                        Nombre = _generoQuery.GetGenero(funcion.Pelicula.GeneroId).Result.Nombre
+                    }
+                },
+                sala = new SalaResponseDTO
+                {
+                    SalaId = funcion.SalaId,
+                    Nombre = _salaQuery.GetById(funcion.SalaId).Result.Nombre,
+                    Capacidad = _salaQuery.GetById(funcion.SalaId).Result.Capacidad,
+                },
+                Fecha = new DateTime(funcion.Fecha.Year, funcion.Fecha.Month, funcion.Fecha.Day).Date,
+                Horario = funcion.Horario.ToString(),
+            };
         }
 
         public Task<TickectResponseCantidadDTO> TickectResponseCantidadDTO(int funcionId)

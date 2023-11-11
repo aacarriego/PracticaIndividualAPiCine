@@ -23,7 +23,7 @@ namespace Infrastructure.Querys
             return _context.Salas.ToList();
         }
 
-        public Sala? GetById(int id)
+        public async Task<Sala?> GetById(int id)
         {
             return _context.Salas.Where(s=> s.SalaId==id).FirstOrDefault();
         }

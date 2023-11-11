@@ -654,6 +654,18 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
         }
       },
+      "SharpCompress/0.34.1": {
+        "type": "package",
+        "dependencies": {
+          "ZstdSharp.Port": "0.7.2"
+        },
+        "compile": {
+          "lib/net7.0/SharpCompress.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0/SharpCompress.dll": {}
+        }
+      },
       "System.CodeDom/4.4.0": {
         "type": "package",
         "compile": {
@@ -1070,12 +1082,22 @@
           }
         }
       },
+      "ZstdSharp.Port/0.7.2": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/ZstdSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0/ZstdSharp.dll": {}
+        }
+      },
       "Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "AutoMapper": "12.0.1",
-          "Domain": "1.0.0"
+          "Domain": "1.0.0",
+          "SharpCompress": "0.34.1"
         },
         "compile": {
           "bin/placeholder/Application.dll": {}
@@ -2041,6 +2063,22 @@
         "mono.texttemplating.nuspec"
       ]
     },
+    "SharpCompress/0.34.1": {
+      "sha512": "WttRM/J/ktUwM3hRPxRYux1AOT+TGLqab34ZNBGTZRChHtpkJXFGHJ/cZCyNOH0OqpCNDdOsHhzxOVYkx4WoGw==",
+      "type": "package",
+      "path": "sharpcompress/0.34.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net462/SharpCompress.dll",
+        "lib/net6.0/SharpCompress.dll",
+        "lib/net7.0/SharpCompress.dll",
+        "lib/netstandard2.0/SharpCompress.dll",
+        "lib/netstandard2.1/SharpCompress.dll",
+        "sharpcompress.0.34.1.nupkg.sha512",
+        "sharpcompress.nuspec"
+      ]
+    },
     "System.CodeDom/4.4.0": {
       "sha512": "2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
       "type": "package",
@@ -2932,6 +2970,24 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "ZstdSharp.Port/0.7.2": {
+      "sha512": "mT6Pb7qzDGapJ2ic4dAFqbzHpM+qgnasQIGR/Sofrk0fmKTQSTljG55OFXHbDJczLZWnUAFsg4bKR81uHiKzPg==",
+      "type": "package",
+      "path": "zstdsharp.port/0.7.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/ZstdSharp.dll",
+        "lib/net5.0/ZstdSharp.dll",
+        "lib/net6.0/ZstdSharp.dll",
+        "lib/net7.0/ZstdSharp.dll",
+        "lib/netcoreapp3.1/ZstdSharp.dll",
+        "lib/netstandard2.0/ZstdSharp.dll",
+        "lib/netstandard2.1/ZstdSharp.dll",
+        "zstdsharp.port.0.7.2.nupkg.sha512",
+        "zstdsharp.port.nuspec"
+      ]
+    },
     "Application/1.0.0": {
       "type": "project",
       "path": "../Application/Application.csproj",
@@ -2957,11 +3013,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\aacar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\aacar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2978,8 +3034,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\aacar\\Source\\Repos\\PracticaIndividualAPiCine\\Application\\Application.csproj"
+            "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\aacar\\source\\repos\\PracticaIndividualAPiCine\\Application\\Application.csproj"
             }
           }
         }

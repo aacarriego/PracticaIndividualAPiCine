@@ -19,7 +19,7 @@ namespace Infrastructure.Querys
             _context = context;
         }
 
-        public Genero GetGenero(int GeneroId)
+        public async Task<Genero> GetGenero(int GeneroId)
         {
             throw new NotImplementedException();
         }

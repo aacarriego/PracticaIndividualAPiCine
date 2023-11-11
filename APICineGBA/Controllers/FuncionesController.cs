@@ -21,23 +21,23 @@ namespace APICineGBA.Controllers
         }
 
 
+        //GET: api/<ValuesController> query parameters optionally
         [HttpGet]
         [ProducesResponseType(typeof(FuncionDTO), 200)]
         [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
         [ProducesResponseType(typeof(ErrorMessageHTTP), 500)]
         [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
-        public async Task<IActionResult> GetAll(string? fecha , string? tituloPelicula , int? generoId )
+        public async Task<IActionResult> GetAll(string? fecha, string? titulo, int? genero)
         {
-            var buscador= new BuscadorFunciones
+            var filtros = new BuscadorFunciones
             {
+                Titulo = titulo,
                 Fecha = fecha,
-                Titulo = tituloPelicula,
-                Genero = generoId
+                GeneroId= genero
             };
-
             try
             {
-                var result = await _service.ListarFunciones(buscador);
+                var result = await _service.ListarFunciones(filtros);
                 return new JsonResult(result) { StatusCode = 200 };
             }
             catch (ElementNotFoundException e)
@@ -46,7 +46,7 @@ namespace APICineGBA.Controllers
                 {
                     message = e.Message,
                 });
-
+                
             }
             catch (Exception e)
             {
@@ -54,47 +54,216 @@ namespace APICineGBA.Controllers
                 {
                     message = e.Message,
                 });
-            }  
+            }
 
         }
 
-        [HttpPost]
 
-        public async Task<IActionResult> CreateFuncion(FuncionDTO request)
+        // GET api/<ValuesController>/5
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FuncionDTO), 200)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 500)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
+        public async Task<IActionResult> GetByFuncion(int id)
+        {
+            try
+            {
+                var result = await _service.GetFuncionById(id);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (ElementNotFoundException e)
+            {
+                return NotFound(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+        }
+
+        //POST api/<ValuesController>
+        [HttpPost]
+        [ProducesResponseType(typeof(FuncionDTO), 201)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 500)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 409)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
+        public async Task<IActionResult> CrearFuncion(FuncionDTO request)
         {
             var funcion = new Funcion
             {
                 PeliculaId = request.PeliculaId,
-                Fecha = request.Fecha,
                 SalaId = request.SalaId,
-                //Horario = request.Horario
+                Fecha = request.Fecha,
+
             };
-            if (TimeSpan.TryParse(request.Horario, out TimeSpan horario))
+            if (TimeSpan.TryParse(request.Horario, out var horario))
             {
                 funcion.Horario = horario;
             }
             else
             {
-                return new JsonResult(new { error = "Horario invalido" });
-            }   
-
-            var result = await _service.CreateFuncion(funcion);
-
-            return new JsonResult(result);
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = "El formato de la hora es incorrecto",
+                });
+            }
+            try
+            {
+                var result = await _service.CreateFuncion(funcion);
+                return new JsonResult(result) { StatusCode = 201 };
+            }
+            catch (InvalidDateFormatException e)
+            {
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (InvalidTimeFormatException e)
+            {
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (ElementNotFoundException e)
+            {
+                return NotFound(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (Exception e)
+            {
+                return Conflict(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
 
         }
 
-      
 
+        // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFuncion(int id)
+        [ProducesResponseType(typeof(FuncionDTO), 200)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 500)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 409)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
+        public async Task<IActionResult> EliminarFuncion(int id)
         {
-           var result = await _service.DeleteFuncion(id);
+            try
+            {
+                var result = await _service.DeleteFuncion(id);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (ElementNotFoundException e)
+            {
+                return NotFound(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (InvalidOperationException e)
+            {
+                return Conflict(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (System.IO.InvalidDataException e)
+            {
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (Exception e)
+            {
+                return Conflict(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
 
-            return new JsonResult(result);
         }
+        //GET api/<ValuesController>/5/tickets
+        [HttpGet("{id}/tickets")]
+        [ProducesResponseType(typeof(TicketDTO), 200)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 500)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
+        public async Task<IActionResult> GetTicketsByFuncion(int id)
+        {
+            try
+            {
+                var result = await _service.GetTickectsByFuncionId(id);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (ElementNotFoundException e)
+            {
+                return NotFound(new ErrorMessageHTTP
+                {
+                    message = e.Message,
 
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
 
+        }
+        //POST api/<ValuesController>/5/tickets
+        [HttpPost("{id}/tickets")]
+        [ProducesResponseType(typeof(TicketDTO), 200)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 400)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 500)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 409)]
+        [ProducesResponseType(typeof(ErrorMessageHTTP), 404)]
+        public async Task<IActionResult> PostTicketsByFuncion(int id, TicketDTO request)
+        {
+            try
+            {
+                var result = await _service.CrearTicketEnFuncion(id, request);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (ElementNotFoundException e)
+            {
+                return NotFound(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (InvalidOperationException e)
+            {
+                return Conflict(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+            catch (Exception e)
+            {
+                return Conflict(new ErrorMessageHTTP
+                {
+                    message = e.Message,
+                });
+            }
+
+        }
 
     }
 
