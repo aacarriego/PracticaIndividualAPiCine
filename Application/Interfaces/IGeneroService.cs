@@ -14,7 +14,7 @@ namespace Application.Interfaces
 
         Task<Genero> DeleteGenero();
 
-        Task<List<Genero>> GetAll();
+        Task<List<GeneroDTO>> GetAll();
 
         Task<Genero> GetGeneroById(int GeneroId);
     }

@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IGeneroQuery
+    public interface ITicketCommand
     {
-        Task<List<GeneroDTO>> GetListGenero();
-
-        Genero GetGenero(int GeneroId);   
-
+        Task<TicketResponseDTO> CrearTicket(Ticket ticket);
     }
 }

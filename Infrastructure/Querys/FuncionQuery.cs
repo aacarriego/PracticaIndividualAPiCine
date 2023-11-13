@@ -26,7 +26,7 @@ namespace Infrastructure.Querys
         {
             var query = _context.Funciones
                 .Include(f => f.Pelicula)
-                    .ThenInclude(p => p.Genero)
+                .ThenInclude(p => p.Genero)
                 .Include(f => f.Sala)
                 .AsQueryable(); 
 

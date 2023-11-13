@@ -20,6 +20,10 @@ namespace APICineGBA.Controllers
 
 
         [HttpGet]
+        [ProducesResponseType(typeof(FuncionDTO), 200)]
+        //[ProducesResponseType(typeof(ErrorMessageHttp), 400)]
+        //[ProducesResponseType(typeof(ErrorMessageHttp), 500)]
+        //[ProducesResponseType(typeof(ErrorMessageHttp), 404)]
         public async Task<IActionResult> GetAll(DateTime? fecha, string? pelicula , int? genero )
         {
             try 
@@ -32,6 +36,8 @@ namespace APICineGBA.Controllers
             {
                 return BadRequest("Ingresó un dato inválido");
             }
+            
+          
 
         }
 
@@ -63,7 +69,24 @@ namespace APICineGBA.Controllers
             return new JsonResult(result);
         }
 
+        [HttpGet("{id}/tickets")]
+        [ProducesResponseType(typeof(TicketDTO), 200)]
+        //[ProducesResponseType(typeof(ErrorMessageHttp), 400)]
+        //[ProducesResponseType(typeof(ErrorMessageHttp), 500)]
+        //[ProducesResponseType(typeof(ErrorMessageHttp), 404)]
+        public async Task<IActionResult> GetTicketsByFuncion(int id)
+        {
+            try
+            {
+                var result = await _service.ObtenerTicketsFuncionPorId(id);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch
+            {
+                return BadRequest("Ingresó un dato inválido");
+            }
 
+        }
 
     }
 

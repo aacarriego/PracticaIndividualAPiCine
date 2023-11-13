@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Application.DTO;
 
 namespace Infrastructure.Querys
 {
@@ -21,13 +22,18 @@ namespace Infrastructure.Querys
 
         public Genero GetGenero(int GeneroId)
         {
-            throw new NotImplementedException();
+             var genero = _context.Generos.Where(g => g.GeneroId == GeneroId).FirstOrDefault();
+            return genero;
         }
-        //perro
-
-        public  List<Genero> GetListGenero()
+       
+        public async Task<List<GeneroDTO>> GetListGenero()
         {
-            return   _context.Generos.ToList();
+            return _context.Generos.Select(g => new GeneroDTO
+            {
+                GeneroId = g.GeneroId,
+                Nombre = g.Nombre
+            }).ToList();       
+
         }
     }
 }

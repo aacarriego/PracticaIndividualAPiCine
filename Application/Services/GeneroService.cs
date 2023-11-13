@@ -39,9 +39,9 @@ namespace Application.UseCase
             throw new NotImplementedException();
         }
 
-        public Task<List<Genero>> GetAll()
+        public async Task<List<GeneroDTO>> GetAll()
         {
-           return Task.FromResult(_query.GetListGenero());
+           return await _query.GetListGenero();
         }
 
         public Task<Genero> GetGeneroById(int GeneroId)
